@@ -10,9 +10,20 @@
         }
     ],
     "require": {
+        "stripe/stripe-php": "^6.19"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.3",
         "vlucas/phpdotenv": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "RandomState\\Stripe\\" : "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RandomState\\Tests\\Stripe\\": "tests"
+        }
     }
 }

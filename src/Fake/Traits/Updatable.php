@@ -10,7 +10,9 @@ trait Updatable
 
     public function update($id, $params)
     {
-        $resource = $this->retrieve($id);
+        $resource = clone $this->retrieve($id);
+        $this->resources[$id] = $resource;
+
         foreach($params as $key => $value) {
             $resource->{$key} = $value;
         }

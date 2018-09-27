@@ -5,7 +5,6 @@ namespace RandomState\Stripe\Fake;
 
 
 use RandomState\Stripe\Fake\Traits\CrudMethods;
-use Stripe\Customer;
 
 class Customers
 {

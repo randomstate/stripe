@@ -6,15 +6,8 @@ namespace RandomState\Stripe\Stripe;
 
 use Stripe\Charge;
 
-class Charges
+class Charges extends StripeResource
 {
-    protected $apiKey;
-
-    public function __construct($apiKey)
-    {
-        $this->apiKey = $apiKey;
-    }
-
     public function create($params)
     {
         return Charge::create($params, $this->options());
@@ -23,13 +16,6 @@ class Charges
     public function retrieve($id)
     {
         return Charge::retrieve($id, $this->options());
-    }
-
-    protected function options()
-    {
-        return [
-            'api_key' => $this->apiKey
-        ];
     }
 
     public function update($id, $params)

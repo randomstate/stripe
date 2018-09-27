@@ -12,16 +12,8 @@ class ChargesTest extends TestCase
 {
     use ChargesContractTests;
 
-    protected $client;
-
-    protected function setUp()
+    public function createClient()
     {
-        parent::setUp();
-        $this->client = new Charges();
-    }
-
-    public function client()
-    {
-        return $this->client;
+        return new Charges();
     }
 }

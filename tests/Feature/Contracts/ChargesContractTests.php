@@ -6,6 +6,7 @@ namespace RandomState\Tests\Stripe\Feature\Contracts;
 
 trait ChargesContractTests
 {
+    use ClientContracts;
 
     /**
      * @test
@@ -92,6 +93,4 @@ trait ChargesContractTests
 
         $this->assertEquals($charge->id, $charges->data[0]->id);
     }
-
-    abstract public function client();
 }

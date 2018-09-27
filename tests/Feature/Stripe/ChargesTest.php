@@ -17,19 +17,8 @@ class ChargesTest extends TestCase
 {
     use ChargesContractTests;
 
-    /**
-     * @var Charges()
-     */
-    protected $client;
-
-    protected function setUp()
+    public function createClient()
     {
-        parent::setUp();
-        $this->client = new Charges(env("STRIPE_KEY"));
-    }
-
-    public function client()
-    {
-        return $this->client;
+        return new Charges(env("STRIPE_KEY"));
     }
 }

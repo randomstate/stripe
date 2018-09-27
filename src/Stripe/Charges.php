@@ -4,27 +4,15 @@
 namespace RandomState\Stripe\Stripe;
 
 
+use RandomState\Stripe\Stripe\Traits\CrudMethods;
 use Stripe\Charge;
 
 class Charges extends StripeResource
 {
-    public function create($params)
-    {
-        return Charge::create($params, $this->options());
-    }
+    use CrudMethods;
 
-    public function retrieve($id)
+    public function getResourceClass()
     {
-        return Charge::retrieve($id, $this->options());
-    }
-
-    public function update($id, $params)
-    {
-        return Charge::update($id, $params, $this->options());
-    }
-
-    public function all($params = null)
-    {
-        return Charge::all($params, $this->options());
+        return Charge::class;
     }
 }

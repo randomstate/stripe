@@ -4,32 +4,15 @@
 namespace RandomState\Stripe\Stripe;
 
 
+use RandomState\Stripe\Stripe\Traits\CrudMethods;
 use Stripe\Customer;
 
 class Customers extends StripeResource
 {
-    public function create($params = [])
-    {
-        return Customer::create($params, $this->options());
-    }
+    use CrudMethods;
 
-    public function retrieve($id)
+    public function getResourceClass()
     {
-        return Customer::retrieve($id, $this->options());
-    }
-
-    public function update($id, $params)
-    {
-        return Customer::update($id, $params, $this->options());
-    }
-
-    public function all($params = null)
-    {
-        return Customer::all($params, $this->options());
-    }
-
-    public function delete($id)
-    {
-        return $this->retrieve($id)->delete();
+        return Customer::class;
     }
 }

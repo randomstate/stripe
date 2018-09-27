@@ -6,24 +6,19 @@ namespace RandomState\Stripe\Fake\Traits;
 
 trait Creatable
 {
-    use ResourceClient, ResourceStorage;
+    use ResourceClient, ResourceStorage, Ids;
 
     public function create($params = [])
     {
-        $id = $this->generateId();
-        $params['id'] = $id;
+        $id = $params['id'] ?? null;
+
+        if(!$id) {
+            $id = $this->generateId();
+            $params['id'] = $id;
+        }
+        
+        $params['metadata'] = [];
+
         return $this->resources[$id] = ($this->getResourceClass())::constructFrom($params);
     }
-
-    public function retrieve($id)
-    {
-        return $this->resources[$id] ?? null;
-    }
-
-    protected function generateId()
-    {
-        return uniqid(static::idPrefix());
-    }
-
-    abstract public static function idPrefix();
 }

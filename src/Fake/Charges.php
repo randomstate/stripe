@@ -6,11 +6,12 @@ namespace RandomState\Stripe\Fake;
 
 use RandomState\Stripe\Fake\Traits\Creatable;
 use RandomState\Stripe\Fake\Traits\Listable;
+use RandomState\Stripe\Fake\Traits\Retrievable;
 use RandomState\Stripe\Fake\Traits\Updatable;
 
 class Charges
 {
-    use Creatable, Updatable, Listable;
+    use Creatable, Retrievable, Updatable, Listable;
 
     public function getResourceClass()
     {

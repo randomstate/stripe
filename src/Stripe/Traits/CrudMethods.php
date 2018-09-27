@@ -6,5 +6,5 @@ namespace RandomState\Stripe\Stripe\Traits;
 
 trait CrudMethods
 {
-    use Creatable, Updatable, Listable, Deletable;
+    use Creatable, Retrievable, Updatable, Listable, Deletable;
 }

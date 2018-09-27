@@ -4,6 +4,7 @@
 namespace RandomState\Stripe\Fake\Traits;
 
 
+use RandomState\Stripe\Fake\Nested\RequestableCollection;
 use Stripe\Collection;
 
 trait Listable
@@ -12,7 +13,7 @@ trait Listable
 
     public function all($params = null)
     {
-        return Collection::constructFrom([
+        return RequestableCollection::constructFrom([
             'data' => array_values($this->resources)
         ]);
     }

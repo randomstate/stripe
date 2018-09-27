@@ -12,10 +12,4 @@ trait Creatable
     {
         return ($this->getResourceClass())::create($params, $this->options());
     }
-
-    // Everything is always readable if creatable
-    public function retrieve($id)
-    {
-        return ($this->getResourceClass())::retrieve($id, $this->options());
-    }
 }

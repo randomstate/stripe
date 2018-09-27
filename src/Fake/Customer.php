@@ -95,4 +95,14 @@ class Customer extends \Stripe\Customer
 
         return $sources;
     }
+
+    public function save($opts = null)
+    {
+    }
+
+    public function deleteDiscount()
+    {
+        $this->coupon = null;
+        $this->discount = null;
+    }
 }

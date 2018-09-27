@@ -13,6 +13,8 @@ class RequestableCollection extends Collection
     protected $onRetrieve;
     protected $onAll;
 
+    protected $onGet;
+
     public function create($params = null, $opts = null)
     {
         return ($this->onCreate)($params, $opts);
@@ -48,5 +50,25 @@ class RequestableCollection extends Collection
         $this->onAll = $closure;
 
         return $this;
+    }
+
+    public function onGet(Closure $closure)
+    {
+        $this->onGet = $closure;
+
+        return $this;
+    }
+
+    public function &__get($k)
+    {
+        if($this->onGet) {
+            $value = ($this->onGet)($k);
+
+            if($value) {
+                return $value;
+            }
+        }
+
+        return parent::__get($k);
     }
 }

@@ -9,6 +9,12 @@ use RandomState\Stripe\Stripe\Products;
 use RandomState\Tests\Stripe\Feature\Contracts\PlansContractTests;
 use RandomState\Tests\Stripe\TestCase;
 
+/**
+ * Class PlansTest
+ * @package RandomState\Tests\Stripe\Feature\Stripe
+ *
+ * @group integration
+ */
 class PlansTest extends TestCase
 {
     use PlansContractTests;

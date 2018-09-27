@@ -9,6 +9,13 @@ use RandomState\Stripe\Stripe\Refunds;
 use RandomState\Tests\Stripe\Feature\Contracts\RefundsContractTests;
 use RandomState\Tests\Stripe\TestCase;
 
+
+/**
+ * Class RefundsTest
+ * @package RandomState\Tests\Stripe\Feature\Stripe
+ *
+ * @group integration
+ */
 class RefundsTest extends TestCase
 {
     use RefundsContractTests;

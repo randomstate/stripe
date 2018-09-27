@@ -10,7 +10,7 @@ use RandomState\Stripe\Fake\Traits\Listable;
 use RandomState\Stripe\Fake\Traits\Retrievable;
 use RandomState\Stripe\Fake\Traits\Updatable;
 
-class SubscriptionItems
+class SubscriptionItems implements \RandomState\Stripe\Contracts\SubscriptionItems
 {
     use Creatable, Retrievable, Updatable, Deletable, Listable;
 

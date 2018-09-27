@@ -6,7 +6,7 @@ namespace RandomState\Stripe\Fake;
 
 use RandomState\Stripe\Fake\Traits\CrudMethods;
 
-class Plans
+class Plans implements \RandomState\Stripe\Contracts\Plans
 {
     use CrudMethods;
 

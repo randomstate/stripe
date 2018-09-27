@@ -9,7 +9,7 @@ use RandomState\Stripe\Stripe\Traits\Retrievable;
 use RandomState\Stripe\Stripe\Traits\Updatable;
 use Stripe\Source;
 
-class Sources extends StripeResourceClient
+class Sources extends StripeResourceClient implements \RandomState\Stripe\Contracts\Sources
 {
     use Creatable, Retrievable, Updatable;
 

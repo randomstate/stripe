@@ -7,7 +7,7 @@ namespace RandomState\Stripe\Fake;
 use RandomState\Stripe\Fake\Traits\Creatable;
 use RandomState\Stripe\Fake\Traits\Retrievable;
 
-class Tokens
+class Tokens implements \RandomState\Stripe\Contracts\Tokens
 {
     use Creatable, Retrievable;
 

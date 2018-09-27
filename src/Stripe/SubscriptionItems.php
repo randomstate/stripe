@@ -4,16 +4,12 @@
 namespace RandomState\Stripe\Stripe;
 
 
-use RandomState\Stripe\Stripe\Traits\Creatable;
-use RandomState\Stripe\Stripe\Traits\Deletable;
-use RandomState\Stripe\Stripe\Traits\Listable;
-use RandomState\Stripe\Stripe\Traits\Retrievable;
-use RandomState\Stripe\Stripe\Traits\Updatable;
+use RandomState\Stripe\Stripe\Traits\CrudMethods;
 use Stripe\SubscriptionItem;
 
-class SubscriptionItems extends StripeResourceClient
+class SubscriptionItems extends StripeResourceClient implements \RandomState\Stripe\Contracts\SubscriptionItems
 {
-    use Creatable, Retrievable, Updatable, Deletable, Listable;
+    use CrudMethods;
 
     public function getResourceClass()
     {

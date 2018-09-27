@@ -9,7 +9,7 @@ use RandomState\Stripe\Fake\Traits\Listable;
 use RandomState\Stripe\Fake\Traits\Updatable;
 use RandomState\Stripe\Fake\Traits\Retrievable;
 
-class Sources
+class Sources implements \RandomState\Stripe\Contracts\Sources
 {
     // Only uses lists in Fake to access elements for customers' nested sources.
     use Ids, Retrievable, Updatable, Listable;

@@ -6,7 +6,7 @@ namespace RandomState\Stripe\Fake;
 
 use RandomState\Stripe\Fake\Traits\CrudMethods;
 
-class Products
+class Products implements \RandomState\Stripe\Contracts\Products
 {
     use CrudMethods;
 

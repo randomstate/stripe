@@ -10,12 +10,17 @@ use RandomState\Stripe\Stripe\Traits\Retrievable;
 use RandomState\Stripe\Stripe\Traits\Updatable;
 use Stripe\Subscription;
 
-class Subscriptions extends StripeResourceClient
+class Subscriptions extends StripeResourceClient implements \RandomState\Stripe\Contracts\Subscriptions
 {
     use Creatable, Updatable, Listable, Retrievable;
 
     public function getResourceClass()
     {
         return Subscription::class;
+    }
+
+    public function items()
+    {
+        return new SubscriptionItems($this->apiKey);
     }
 }

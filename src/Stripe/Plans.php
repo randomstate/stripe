@@ -7,7 +7,7 @@ namespace RandomState\Stripe\Stripe;
 use RandomState\Stripe\Stripe\Traits\CrudMethods;
 use Stripe\Plan;
 
-class Plans extends StripeResourceClient
+class Plans extends StripeResourceClient implements \RandomState\Stripe\Contracts\Plans
 {
     use CrudMethods;
 

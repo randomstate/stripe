@@ -6,7 +6,6 @@ namespace RandomState\Stripe\Fake;
 
 use RandomState\Stripe\Fake\Nested\RequestableCollection;
 use Stripe\Collection;
-use Stripe\Util\Util;
 
 class Customer extends \Stripe\Customer
 {

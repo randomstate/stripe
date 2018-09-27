@@ -6,7 +6,7 @@ namespace RandomState\Stripe\Stripe\Traits;
 
 trait Creatable
 {
-    use Resource;
+    use ResourceClient;
 
     public function create($params = [])
     {

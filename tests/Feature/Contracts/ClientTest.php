@@ -4,7 +4,7 @@
 namespace RandomState\Tests\Stripe\Feature\Contracts;
 
 
-trait ClientContracts
+trait ClientTest
 {
     protected $client;
 

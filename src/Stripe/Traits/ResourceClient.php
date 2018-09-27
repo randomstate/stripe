@@ -1,7 +1,7 @@
 <?php
 
 
-namespace RandomState\Stripe;
+namespace RandomState\Stripe\Stripe\Traits;
 
 
 trait ResourceClient

@@ -6,7 +6,7 @@ namespace RandomState\Tests\Stripe\Feature\Contracts;
 
 trait ChargesContractTests
 {
-    use ClientContracts;
+    use ClientTest;
 
     /**
      * @test

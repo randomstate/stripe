@@ -4,7 +4,7 @@
 namespace RandomState\Stripe\Stripe;
 
 
-class StripeResource
+class StripeResourceClient
 {
     /**
      * @var string

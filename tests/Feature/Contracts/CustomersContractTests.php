@@ -8,7 +8,7 @@ use Stripe\Customer;
 
 trait CustomersContractTests
 {
-    use ClientContracts;
+    use ClientTest;
 
     /**
      * @test

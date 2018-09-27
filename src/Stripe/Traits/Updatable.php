@@ -6,7 +6,7 @@ namespace RandomState\Stripe\Stripe\Traits;
 
 trait Updatable
 {
-    use Resource;
+    use ResourceClient;
 
     public function update($id, $params)
     {

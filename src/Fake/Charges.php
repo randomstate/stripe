@@ -4,37 +4,21 @@
 namespace RandomState\Stripe\Fake;
 
 
-use Stripe\Collection;
+use RandomState\Stripe\Fake\Traits\Creatable;
+use RandomState\Stripe\Fake\Traits\Listable;
+use RandomState\Stripe\Fake\Traits\Updatable;
 
 class Charges
 {
-    protected $charges = [];
+    use Creatable, Updatable, Listable;
 
-    public function create($params)
+    public function getResourceClass()
     {
-        $id = $params['id'] = uniqid('ch_');
-        return $this->charges[$id] = Charge::constructFrom($params);
+        return Charge::class;
     }
 
-    public function retrieve($id)
+    public static function idPrefix()
     {
-        return $this->charges[$id] ?? null;
-    }
-
-    public function update($id, $params)
-    {
-        $charge = $this->retrieve($id);
-        foreach($params as $key => $value) {
-            $charge->{$key} = $value;
-        }
-
-        return $charge;
-    }
-
-    public function all($params = null)
-    {
-        return Collection::constructFrom([
-            'data' => array_values($this->charges)
-        ]);
+        return 'ch_';
     }
 }

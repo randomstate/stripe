@@ -23,7 +23,7 @@ class Customers extends StripeResource
         return Customer::update($id, $params, $this->options());
     }
 
-    public function all($params = [])
+    public function all($params = null)
     {
         return Customer::all($params, $this->options());
     }

@@ -16,7 +16,8 @@ trait Creatable
             $id = $this->generateId();
             $params['id'] = $id;
         }
-        
+
+        $params['created'] = time();
         $params['metadata'] = [];
 
         return $this->resources[$id] = ($this->getResourceClass())::constructFrom($params);

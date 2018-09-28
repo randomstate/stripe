@@ -38,6 +38,7 @@ class WebhookListener
     {
         $events = $this->events->all([
             'ending_before' => $this->mostRecentEventId,
+            'limit' => 100,
         ]);
 
         $this->mostRecentEventId = $this->mostRecentEventId();

@@ -27,6 +27,16 @@ class Subscription extends \Stripe\Subscription
         return parent::__get($k);
     }
 
+    public function save($opts = null)
+    {
+    }
+
+    public function deleteDiscount()
+    {
+        $this->coupon = null;
+        $this->discount = null;
+    }
+
     public function cancel($params = null, $opts = null)
     {
         $this->status = 'canceled';

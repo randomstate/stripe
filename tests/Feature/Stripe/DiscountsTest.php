@@ -6,6 +6,9 @@ namespace RandomState\Tests\Stripe\Feature\Stripe;
 
 use RandomState\Stripe\Stripe\Coupons;
 use RandomState\Stripe\Stripe\Customers;
+use RandomState\Stripe\Stripe\Plans;
+use RandomState\Stripe\Stripe\Products;
+use RandomState\Stripe\Stripe\Subscriptions;
 use RandomState\Tests\Stripe\Feature\Contracts\DiscountsContractTests;
 use RandomState\Tests\Stripe\TestCase;
 
@@ -30,11 +33,18 @@ class DiscountsTest extends TestCase
         return new Coupons(env("STRIPE_KEY"));
     }
 
-    /**
-     * @test
-     */
-    public function can_remove_a_discount_applied_to_a_subscription()
+    public function subscriptionsClient()
     {
-        $this->markTestIncomplete("Need to support subscriptions first");
+        return new Subscriptions(env("STRIPE_KEY"));
+    }
+
+    public function plansClient()
+    {
+        return new Plans(env("STRIPE_KEY"));
+    }
+
+    public function productsClient()
+    {
+        return new Products(env("STRIPE_KEY"));
     }
 }

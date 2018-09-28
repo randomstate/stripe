@@ -22,11 +22,15 @@ class ListOperator
         ];
     }
 
-    public function apply($operators, $items)
+    public function apply(array $operators = null, $items)
     {
         // Defaults
         foreach ($this->defaultOperators as $operator) {
             $items = $operator->apply($items);
+        }
+
+        if(!$operators) {
+            return $items;
         }
 
         foreach ($this->operators as $operatorKey => $operator) {

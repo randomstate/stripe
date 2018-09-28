@@ -10,6 +10,13 @@ use RandomState\Stripe\Stripe\WebhookListener;
 use RandomState\Tests\Stripe\TestCase;
 use Stripe\Event;
 
+
+/**
+ * Class WebhooksTest
+ * @package RandomState\Tests\Stripe\Feature\Stripe
+ *
+ * @group integration
+ */
 class WebhooksTest extends TestCase
 {
     /**

@@ -6,6 +6,7 @@ namespace RandomState\Stripe\Fake\Traits;
 
 use Closure;
 use RandomState\Stripe\Fake\Nested\RequestableCollection;
+use RandomState\Stripe\Stripe\Operations\ListOperator;
 
 trait Listable
 {
@@ -13,8 +14,10 @@ trait Listable
 
     public function all($params = null)
     {
+        $operator = new ListOperator();
+
         return RequestableCollection::constructFrom([
-            'data' => array_values($this->inReverseChronologicalOrder($this->resources))
+            'data' => $operator->apply($params, array_values($this->resources))
         ]);
     }
 
@@ -23,10 +26,13 @@ trait Listable
         $id = $this->mostRecentId();
         $closure();
 
-        return $this->all([
-            'ending_before' => $id,
-            'limit' => 100,
-        ]);
+        $options = [];
+
+        if($id) {
+            $options['ending_before'] = $id;
+        }
+
+        return $this->all()->data;
     }
 
     public function mostRecentId()

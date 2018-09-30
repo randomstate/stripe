@@ -17,4 +17,13 @@ class TokensTest extends TestCase
         return new Tokens;
     }
 
+    /**
+     * @test
+     */
+    public function dummy_tokens_pre_exist()
+    {
+        $token = $this->client()->retrieve('tok_visa_debit');
+        $this->assertNotNull($token);
+    }
+
 }

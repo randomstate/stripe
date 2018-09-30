@@ -11,6 +11,13 @@ class Tokens implements \RandomState\Stripe\Contracts\Tokens
 {
     use Creatable, Retrievable;
 
+    public function __construct()
+    {
+        foreach(DummySourceFactory::$cardNumbers as $token) {
+            $this->create(['id' => $token]);
+        }
+    }
+
     public static function idPrefix()
     {
         return 'tok_';

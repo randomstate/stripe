@@ -17,5 +17,4 @@ class TokensTest extends TestCase
         return new Tokens;
     }
 
-
 }

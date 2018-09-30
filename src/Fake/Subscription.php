@@ -13,6 +13,7 @@ class Subscription extends \Stripe\Subscription
         if($k === 'items') {
             $items = parent::__get($k);
             $processed = [];
+
             foreach($items as $item) {
                 $processed[] = SubscriptionItem::constructFrom($item);
             }
@@ -22,6 +23,11 @@ class Subscription extends \Stripe\Subscription
             ]);
 
             return $items;
+        }
+
+
+        if($k === 'plan' && count($this->items) == 1) {
+            return $this->items->data[0]->plan;
         }
 
         return parent::__get($k);

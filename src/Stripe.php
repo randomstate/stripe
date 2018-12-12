@@ -14,6 +14,7 @@ use RandomState\Stripe\Stripe\Sources;
 use RandomState\Stripe\Stripe\StripeResourceClient;
 use RandomState\Stripe\Stripe\Subscriptions;
 use RandomState\Stripe\Stripe\Tokens;
+use RandomState\Stripe\Stripe\UsageRecords;
 
 class Stripe extends StripeResourceClient implements BillingProvider
 {
@@ -26,6 +27,7 @@ class Stripe extends StripeResourceClient implements BillingProvider
     protected $coupons;
     protected $plans;
     protected $subscriptions;
+    protected $usageRecords;
 
     public function __construct($apiKey)
     {
@@ -39,6 +41,7 @@ class Stripe extends StripeResourceClient implements BillingProvider
         $this->coupons = new Coupons($this->apiKey);
         $this->plans = new Plans($this->apiKey);
         $this->subscriptions = new Subscriptions($this->apiKey);
+        $this->usageRecords = new UsageRecords($this->apiKey);
     }
 
     public function charges()
@@ -84,5 +87,10 @@ class Stripe extends StripeResourceClient implements BillingProvider
     public function subscriptions()
     {
         return $this->subscriptions;
+    }
+
+    public function usageRecords()
+    {
+        return $this->usageRecords;
     }
 }

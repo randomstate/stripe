@@ -8,7 +8,7 @@ use Stripe\SubscriptionItem;
 
 trait SubscriptionItemsContractTests
 {
-    use ClientTest;
+    use ClientTest, TestHelpers;
 
     abstract public function createClient();
 
@@ -121,37 +121,5 @@ trait SubscriptionItemsContractTests
         $this->assertEquals($item->id, $items->data[count($items->data) - 1]->id);
     }
 
-    protected function createTestPlan()
-    {
-        $product = $this->productsClient()->create([
-            'name' => 'test product',
-            'type' => 'service',
-        ]);
 
-        $plan = $this->plansClient()->create([
-            'product' => $product->id,
-            'currency' => 'gbp',
-            'interval' => 'month',
-            'amount' => 10000,
-            'trial_period_days' => 60,
-        ]);
-
-        return $plan;
-    }
-
-    protected function createTestSubscription()
-    {
-        $customer = $this->customersClient()->create();
-
-        return $this->subscriptionsClient()->create([
-            'customer' => $customer->id,
-            'trial_from_plan' => true,
-            'items' => [
-                [
-                    'plan' => ($plan = $this->createTestPlan())->id,
-                    'quantity' => $quantity = rand(0, 10),
-                ]
-            ]
-        ]);
-    }
 }

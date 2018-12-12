@@ -9,28 +9,34 @@ use RandomState\Stripe\Stripe\Plans;
 use RandomState\Stripe\Stripe\Products;
 use RandomState\Stripe\Stripe\SubscriptionItems;
 use RandomState\Stripe\Stripe\Subscriptions;
-use RandomState\Tests\Stripe\Feature\Contracts\SubscriptionItemsContractTests;
+use RandomState\Stripe\Stripe\UsageRecords;
+use RandomState\Tests\Stripe\Feature\Contracts\ClientTest;
+use RandomState\Tests\Stripe\Feature\Contracts\UsageRecordsContractTests;
 use RandomState\Tests\Stripe\TestCase;
 
-
 /**
- * Class SubscriptionItemsTest
+ * Class UsageRecordsTest
  * @package RandomState\Tests\Stripe\Feature\Stripe
  *
  * @group integration
  */
-class SubscriptionItemsTest extends TestCase
+class UsageRecordsTest extends TestCase
 {
-    use SubscriptionItemsContractTests;
+    use ClientTest, UsageRecordsContractTests;
 
     public function createClient()
     {
-        return new SubscriptionItems(env("STRIPE_KEY"));
+        return new UsageRecords(env("STRIPE_KEY"));
     }
 
     public function subscriptionsClient()
     {
         return new Subscriptions(env("STRIPE_KEY"));
+    }
+
+    public function subscriptionItemsClient()
+    {
+        return new SubscriptionItems(env("STRIPE_KEY"));
     }
 
     public function customersClient()

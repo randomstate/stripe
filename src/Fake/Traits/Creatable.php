@@ -17,8 +17,11 @@ trait Creatable
             $params['id'] = $id;
         }
 
-        $params['created'] = time();
-        $params['metadata'] = [];
+        $params = array_merge([
+            'created' => time(),
+            'metadata' => [],
+            'livemode' => false,
+        ], $params);
 
         return $this->resources[$id] = ($this->getResourceClass())::constructFrom($params);
     }

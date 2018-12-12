@@ -17,6 +17,8 @@ class Token extends \Stripe\Token
             ];
         }
 
+        $values['used'] = false;
+
         return parent::constructFrom($values, $opts);
     }
 }

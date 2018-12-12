@@ -13,6 +13,7 @@ use RandomState\Stripe\Fake\Refunds;
 use RandomState\Stripe\Fake\Sources;
 use RandomState\Stripe\Fake\Subscriptions;
 use RandomState\Stripe\Fake\Tokens;
+use RandomState\Stripe\Fake\UsageRecords;
 
 class Fake implements BillingProvider
 {
@@ -25,6 +26,7 @@ class Fake implements BillingProvider
     protected $coupons;
     protected $plans;
     protected $subscriptions;
+    protected $usageRecords;
 
     public function __construct()
     {
@@ -37,6 +39,7 @@ class Fake implements BillingProvider
         $this->coupons = new Coupons;
         $this->plans = new Plans;
         $this->subscriptions = new Subscriptions;
+        $this->usageRecords = new UsageRecords;
     }
 
     public function charges()
@@ -82,5 +85,10 @@ class Fake implements BillingProvider
     public function subscriptions()
     {
         return $this->subscriptions;
+    }
+
+    public function usageRecords()
+    {
+        return $this->usageRecords;
     }
 }

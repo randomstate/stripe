@@ -39,6 +39,7 @@ trait SubscriptionsContractTests
         $this->assertInstanceOf(Subscription::class, $subscription);
         $this->assertEquals($quantity, $subscription->items->data[0]->quantity);
         $this->assertEquals($plan->id, $subscription->items->data[0]->plan->id);
+        $this->assertNotNull($subscription->items->data[0]->id);
     }
 
     /**
@@ -61,6 +62,7 @@ trait SubscriptionsContractTests
 
         $found = $this->client()->retrieve($subscription->id);
         $this->assertEquals($subscription->id, $found->id);
+        $this->assertNotNull($subscription->items->data[0]->id);
     }
 
     /**

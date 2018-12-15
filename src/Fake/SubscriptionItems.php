@@ -16,7 +16,7 @@ class SubscriptionItems implements \RandomState\Stripe\Contracts\SubscriptionIte
 
     public static function idPrefix()
     {
-        return 'si_';
+        return SubscriptionItem::idPrefix();
     }
 
     public function getResourceClass()

@@ -4,6 +4,7 @@
 namespace RandomState\Tests\Stripe\Feature\Stripe;
 
 
+use RandomState\Stripe\Stripe;
 use RandomState\Stripe\Stripe\Customers;
 use RandomState\Stripe\Stripe\Events;
 use RandomState\Stripe\Stripe\WebhookListener;
@@ -75,5 +76,15 @@ class WebhooksTest extends TestCase
         });
 
         $this->assertTrue($listenerDidItsThing);
+    }
+
+    /**
+     * @test
+     */
+    public function stripe_client_has_events_factory_method()
+    {
+        $stripe = new Stripe(env("STRIPE_KEY"));
+
+        $this->assertInstanceOf(Events::class, $stripe->events());
     }
 }

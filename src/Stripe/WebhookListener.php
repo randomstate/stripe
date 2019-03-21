@@ -24,9 +24,15 @@ class WebhookListener
      */
     protected $onEvent;
 
-    public function __construct(Events $events)
+    /**
+     * @var WebhookSigner
+     */
+    protected $signer;
+
+    public function __construct(Events $events, WebhookSigner $signer = null)
     {
         $this->events = $events;
+        $this->signer = $signer;
     }
 
     public function record()
@@ -45,7 +51,8 @@ class WebhookListener
 
         if($this->onEvent) {
             foreach($events->autoPagingIterator() as $event) {
-                ($this->onEvent)($event);
+                $signature = $this->signer ? $this->signer->sign($event) : null;
+                ($this->onEvent)($event, $signature);
             }
         }
 

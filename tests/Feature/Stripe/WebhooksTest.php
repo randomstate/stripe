@@ -8,8 +8,10 @@ use RandomState\Stripe\Stripe;
 use RandomState\Stripe\Stripe\Customers;
 use RandomState\Stripe\Stripe\Events;
 use RandomState\Stripe\Stripe\WebhookListener;
+use RandomState\Stripe\Stripe\WebhookSigner;
 use RandomState\Tests\Stripe\TestCase;
 use Stripe\Event;
+use Stripe\Webhook;
 
 
 /**
@@ -28,7 +30,10 @@ class WebhooksTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->webhooks = new WebhookListener(new Events(env("STRIPE_KEY")));
+        $this->webhooks = new WebhookListener(
+            new Events(env("STRIPE_KEY")),
+            new WebhookSigner(env("STRIPE_SIGNING_KEY"))
+        );
     }
 
     /**
@@ -86,5 +91,29 @@ class WebhooksTest extends TestCase
         $stripe = new Stripe(env("STRIPE_KEY"));
 
         $this->assertInstanceOf(Events::class, $stripe->events());
+    }
+
+    /**
+     * @test
+     */
+    public function webhook_listener_provides_valid_signature()
+    {
+        $event = null;
+        $signatureGenerated = null;
+
+        $this->webhooks->listen(function(Event $generatedEvent, $signature) use(&$event, &$signatureGenerated) {
+            $signatureGenerated = $signature;
+            $event = $generatedEvent;
+        });
+
+        $this->webhooks->during(function() {
+            $customers = new Customers(env("STRIPE_KEY"));
+            $customers->create();
+        });
+
+        Webhook::constructEvent(json_encode($event->jsonSerialize()), $signatureGenerated, env("STRIPE_SIGNING_KEY"));
+        $valid = true;
+
+        $this->assertTrue($valid);
     }
 }

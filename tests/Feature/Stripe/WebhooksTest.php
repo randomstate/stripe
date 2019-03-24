@@ -139,4 +139,26 @@ class WebhooksTest extends TestCase
 
         $this->assertEquals(2, $called);
     }
+
+    /**
+     * @test
+     */
+    public function events_are_in_order_of_creation_not_newest_first()
+    {
+        $listened = [];
+
+        $this->webhooks->listen(function(Event $generatedEvent, $signature) use(&$listened) {
+            $listened[] = $generatedEvent->type;
+        });
+
+        $this->webhooks->during(function() {
+            $customers = new Customers(env("STRIPE_KEY"));
+            $customer = $customers->create();
+
+            $customer->delete();
+        });
+
+        $this->assertEquals('customer.created', $listened[0]);
+        $this->assertEquals('customer.deleted', $listened[1]);
+    }
 }

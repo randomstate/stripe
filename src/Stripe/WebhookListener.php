@@ -50,7 +50,13 @@ class WebhookListener
         $this->mostRecentEventId = $this->mostRecentEventId();
 
         if($this->listens()) {
+            $eventsInChronologicalOrder = [];
+
             foreach($events->autoPagingIterator() as $event) {
+                array_unshift($eventsInChronologicalOrder, $event);
+            }
+
+            foreach($eventsInChronologicalOrder as $event) {
                 $signature = $this->signer ? $this->signer->sign($event) : null;
                 $this->notifyListeners($event, $signature);
             }

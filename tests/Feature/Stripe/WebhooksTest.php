@@ -116,4 +116,27 @@ class WebhooksTest extends TestCase
 
         $this->assertTrue($valid);
     }
+
+    /**
+     * @test
+     */
+    public function webhooks_can_fire_to_different_listeners()
+    {
+        $called = 0;
+
+        $this->webhooks->listen(function(Event $generatedEvent, $signature) use(&$called) {
+            $called++;
+        });
+
+        $this->webhooks->listen(function(Event $generatedEvent, $signature) use(&$called) {
+            $called++;
+        });
+
+        $this->webhooks->during(function() {
+           $customers = new Customers(env("STRIPE_KEY"));
+           $customers->create();
+        });
+
+        $this->assertEquals(2, $called);
+    }
 }

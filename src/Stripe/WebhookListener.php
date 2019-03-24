@@ -20,9 +20,9 @@ class WebhookListener
     protected $mostRecentEventId;
 
     /**
-     * @var Closure
+     * @var Closure[]
      */
-    protected $onEvent;
+    protected $onEvent = [];
 
     /**
      * @var WebhookSigner
@@ -49,10 +49,10 @@ class WebhookListener
 
         $this->mostRecentEventId = $this->mostRecentEventId();
 
-        if($this->onEvent) {
+        if($this->listens()) {
             foreach($events->autoPagingIterator() as $event) {
                 $signature = $this->signer ? $this->signer->sign($event) : null;
-                ($this->onEvent)($event, $signature);
+                $this->notifyListeners($event, $signature);
             }
         }
 
@@ -77,8 +77,20 @@ class WebhookListener
         return null;
     }
 
+    public function listens()
+    {
+        return count($this->onEvent) > 0;
+    }
+
+    protected function notifyListeners(Event $event, $signature)
+    {
+        foreach($this->onEvent as $listener) {
+            $listener($event, $signature);
+        }
+    }
+
     public function listen(Closure $onEvent)
     {
-        $this->onEvent = $onEvent;
+        $this->onEvent[] = $onEvent;
     }
 }

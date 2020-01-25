@@ -8,6 +8,7 @@ use RandomState\Stripe\Stripe\Charges;
 use RandomState\Stripe\Stripe\Coupons;
 use RandomState\Stripe\Stripe\Customers;
 use RandomState\Stripe\Stripe\Events;
+use RandomState\Stripe\Stripe\PaymentMethods;
 use RandomState\Stripe\Stripe\Plans;
 use RandomState\Stripe\Stripe\Products;
 use RandomState\Stripe\Stripe\Refunds;
@@ -16,7 +17,6 @@ use RandomState\Stripe\Stripe\StripeResourceClient;
 use RandomState\Stripe\Stripe\Subscriptions;
 use RandomState\Stripe\Stripe\Tokens;
 use RandomState\Stripe\Stripe\UsageRecords;
-use Stripe\PaymentMethod;
 
 class Stripe extends StripeResourceClient implements BillingProvider
 {
@@ -47,7 +47,7 @@ class Stripe extends StripeResourceClient implements BillingProvider
         $this->subscriptions = new Subscriptions($this->apiKey);
         $this->usageRecords = new UsageRecords($this->apiKey);
         $this->events = new Events($this->apiKey);
-        $this->paymentMethods = new PaymentMethod($this->apiKey);
+        $this->paymentMethods = new PaymentMethods($this->apiKey);
     }
 
     public function charges()

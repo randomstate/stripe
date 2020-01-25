@@ -7,6 +7,7 @@ namespace RandomState\Stripe;
 use RandomState\Stripe\Fake\Charges;
 use RandomState\Stripe\Fake\Coupons;
 use RandomState\Stripe\Fake\Customers;
+use RandomState\Stripe\Fake\PaymentMethods;
 use RandomState\Stripe\Fake\Plans;
 use RandomState\Stripe\Fake\Products;
 use RandomState\Stripe\Fake\Refunds;
@@ -27,6 +28,7 @@ class Fake implements BillingProvider
     protected $plans;
     protected $subscriptions;
     protected $usageRecords;
+    protected $paymentMethods;
 
     public function __construct()
     {
@@ -40,6 +42,7 @@ class Fake implements BillingProvider
         $this->plans = new Plans;
         $this->subscriptions = new Subscriptions;
         $this->usageRecords = new UsageRecords;
+        $this->paymentMethods = new PaymentMethods();
     }
 
     public function charges()
@@ -90,5 +93,10 @@ class Fake implements BillingProvider
     public function usageRecords()
     {
         return $this->usageRecords;
+    }
+
+    public function paymentMethods()
+    {
+        return $this->paymentMethods;
     }
 }

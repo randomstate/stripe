@@ -5,6 +5,7 @@ namespace RandomState\Stripe;
 use RandomState\Stripe\Contracts\Charges;
 use RandomState\Stripe\Contracts\Coupons;
 use RandomState\Stripe\Contracts\Customers;
+use RandomState\Stripe\Contracts\PaymentMethods;
 use RandomState\Stripe\Contracts\Plans;
 use RandomState\Stripe\Contracts\Products;
 use RandomState\Stripe\Contracts\Refunds;
@@ -64,4 +65,9 @@ interface BillingProvider
      * @return UsageRecords
      */
     public function usageRecords();
+
+    /**
+     * @return PaymentMethods
+     */
+    public function paymentMethods();
 }

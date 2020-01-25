@@ -19,6 +19,9 @@ class ListOperator
             'ending_before' => new EndingBefore(),
             'starting_after' => new StartingAfter(),
             'limit' => new LimitOperator(),
+
+            'customer' => new CustomerFilter(),
+            'type' => new TypeFilter(),
         ];
     }
 

@@ -10,6 +10,7 @@ use RandomState\Stripe\Contracts\Charges;
 use RandomState\Stripe\Contracts\Coupons;
 use RandomState\Stripe\Contracts\Customers;
 use RandomState\Stripe\Contracts\Discounts;
+use RandomState\Stripe\Contracts\PaymentMethods;
 use RandomState\Stripe\Contracts\Plans;
 use RandomState\Stripe\Contracts\Products;
 use RandomState\Stripe\Contracts\Refunds;
@@ -17,6 +18,7 @@ use RandomState\Stripe\Contracts\Sources;
 use RandomState\Stripe\Contracts\SubscriptionItems;
 use RandomState\Stripe\Contracts\Subscriptions;
 use RandomState\Stripe\Contracts\Tokens;
+use RandomState\Stripe\Contracts\UsageRecords;
 
 trait BillingProviderContractTests
 {
@@ -101,4 +103,21 @@ trait BillingProviderContractTests
     {
         $this->assertInstanceOf(SubscriptionItems::class, $this->getProvider()->subscriptions()->items());
     }
+
+    /**
+     * @test
+     */
+    public function has_usage_records_client()
+    {
+        $this->assertInstanceOf(UsageRecords::class, $this->getProvider()->usageRecords());
+    }
+
+    /**
+     * @test
+     */
+    public function has_payment_methods_client()
+    {
+        $this->assertInstanceOf(PaymentMethods::class, $this->getProvider()->paymentMethods());
+    }
+
 }

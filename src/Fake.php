@@ -11,6 +11,7 @@ use RandomState\Stripe\Fake\PaymentMethods;
 use RandomState\Stripe\Fake\Plans;
 use RandomState\Stripe\Fake\Products;
 use RandomState\Stripe\Fake\Refunds;
+use RandomState\Stripe\Fake\SetupIntents;
 use RandomState\Stripe\Fake\Sources;
 use RandomState\Stripe\Fake\Subscriptions;
 use RandomState\Stripe\Fake\Tokens;
@@ -29,6 +30,7 @@ class Fake implements BillingProvider
     protected $subscriptions;
     protected $usageRecords;
     protected $paymentMethods;
+    protected $setupIntents;
 
     public function __construct()
     {
@@ -43,6 +45,7 @@ class Fake implements BillingProvider
         $this->subscriptions = new Subscriptions;
         $this->usageRecords = new UsageRecords;
         $this->paymentMethods = new PaymentMethods();
+        $this->setupIntents = new SetupIntents();
     }
 
     public function charges()
@@ -98,5 +101,10 @@ class Fake implements BillingProvider
     public function paymentMethods()
     {
         return $this->paymentMethods;
+    }
+
+    public function setupIntents()
+    {
+        return $this->setupIntents;
     }
 }

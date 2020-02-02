@@ -4,6 +4,7 @@
 namespace RandomState\Tests\Stripe\Feature\Contracts;
 
 
+use RandomState\Stripe\Contracts\Charges;
 use Stripe\Refund;
 
 trait RefundsContractTests

@@ -14,6 +14,7 @@ use RandomState\Stripe\Contracts\PaymentMethods;
 use RandomState\Stripe\Contracts\Plans;
 use RandomState\Stripe\Contracts\Products;
 use RandomState\Stripe\Contracts\Refunds;
+use RandomState\Stripe\Contracts\SetupIntents;
 use RandomState\Stripe\Contracts\Sources;
 use RandomState\Stripe\Contracts\SubscriptionItems;
 use RandomState\Stripe\Contracts\Subscriptions;
@@ -120,4 +121,12 @@ trait BillingProviderContractTests
         $this->assertInstanceOf(PaymentMethods::class, $this->getProvider()->paymentMethods());
     }
 
+
+    /**
+     * @test
+     */
+    public function has_setup_intents_client()
+    {
+        $this->assertInstanceOf(SetupIntents::class, $this->getProvider()->setupIntents());
+    }
 }

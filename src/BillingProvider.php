@@ -9,6 +9,7 @@ use RandomState\Stripe\Contracts\PaymentMethods;
 use RandomState\Stripe\Contracts\Plans;
 use RandomState\Stripe\Contracts\Products;
 use RandomState\Stripe\Contracts\Refunds;
+use RandomState\Stripe\Contracts\SetupIntents;
 use RandomState\Stripe\Contracts\Sources;
 use RandomState\Stripe\Contracts\SubscriptionItems;
 use RandomState\Stripe\Contracts\Tokens;
@@ -70,4 +71,9 @@ interface BillingProvider
      * @return PaymentMethods
      */
     public function paymentMethods();
+
+    /**
+     * @return SetupIntents
+     */
+    public function setupIntents();
 }

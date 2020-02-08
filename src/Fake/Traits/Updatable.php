@@ -6,7 +6,7 @@ namespace RandomState\Stripe\Fake\Traits;
 
 trait Updatable
 {
-    use ResourceClient, ResourceStorage;
+    use ResourceClient, ResourceStorage, ExpandsResource;
 
     public function update($id, $params)
     {
@@ -16,6 +16,9 @@ trait Updatable
         foreach($params as $key => $value) {
             $resource->{$key} = $value;
         }
+
+        $expands = $params['expand'] ?? [];
+        $this->resolveExpansions($resource, $expands);
 
         return $resource;
     }

@@ -4,14 +4,11 @@
 namespace RandomState\Stripe\Fake;
 
 
-use RandomState\Stripe\Fake\Traits\Creatable;
-use RandomState\Stripe\Fake\Traits\Listable;
-use RandomState\Stripe\Fake\Traits\Retrievable;
-use RandomState\Stripe\Fake\Traits\Updatable;
+use RandomState\Stripe\Fake\Traits\CruMethods;
 
 class Charges implements \RandomState\Stripe\Contracts\Charges
 {
-    use Creatable, Retrievable, Updatable, Listable;
+    use CruMethods;
 
     public function getResourceClass()
     {

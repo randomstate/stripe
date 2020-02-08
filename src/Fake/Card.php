@@ -4,8 +4,12 @@
 namespace RandomState\Stripe\Fake;
 
 
+use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
+
 class Card extends \Stripe\Card
 {
+    use RuntimeExpansions;
+    
     public function save($opts = null)
     {
     }

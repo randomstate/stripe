@@ -9,7 +9,9 @@ use RandomState\Stripe\Fake\Traits\Retrievable;
 
 class Tokens implements \RandomState\Stripe\Contracts\Tokens
 {
-    use Creatable, Retrievable;
+    use Creatable, Retrievable {
+        Creatable::resolveExpansions insteadof Retrievable;
+    }
 
     public function __construct()
     {

@@ -4,15 +4,11 @@
 namespace RandomState\Stripe\Fake;
 
 
-use RandomState\Stripe\Fake\Traits\Creatable;
-use RandomState\Stripe\Fake\Traits\Deletable;
-use RandomState\Stripe\Fake\Traits\Listable;
-use RandomState\Stripe\Fake\Traits\Retrievable;
-use RandomState\Stripe\Fake\Traits\Updatable;
+use RandomState\Stripe\Fake\Traits\CrudMethods;
 
 class Subscriptions implements \RandomState\Stripe\Contracts\Subscriptions
 {
-    use Creatable, Retrievable, Updatable, Deletable, Listable;
+    use CrudMethods;
 
     protected $items;
 

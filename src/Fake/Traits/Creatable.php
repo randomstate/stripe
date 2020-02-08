@@ -6,7 +6,7 @@ namespace RandomState\Stripe\Fake\Traits;
 
 trait Creatable
 {
-    use ResourceClient, ResourceStorage, Ids;
+    use ResourceClient, ResourceStorage, Ids, ExpandsResource;
 
     public function create($params = [])
     {
@@ -23,6 +23,13 @@ trait Creatable
             'livemode' => false,
         ], $params);
 
-        return $this->resources[$id] = ($this->getResourceClass())::constructFrom($params);
+        $expands = $params['expand'] ?? [];
+        unset($params['expand']);
+
+        $this->resources[$id] = $object = ($this->getResourceClass())::constructFrom($params);
+
+        $this->resolveExpansions($object, $expands);
+
+        return $object;
     }
 }

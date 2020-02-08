@@ -4,8 +4,12 @@
 namespace RandomState\Stripe\Fake;
 
 
+use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
+
 class SetupIntent extends \Stripe\SetupIntent
 {
+    use RuntimeExpansions;
+
     public function confirm($params = null, $options = null)
     {
         $this->updateAttributes($params);

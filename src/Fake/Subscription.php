@@ -5,9 +5,20 @@ namespace RandomState\Stripe\Fake;
 
 
 use RandomState\Stripe\Fake\Nested\RequestableCollection;
+use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
 
 class Subscription extends \Stripe\Subscription
 {
+    use RuntimeExpansions;
+
+    public static function constructFrom($values, $opts = null)
+    {
+        $sub = parent::constructFrom($values, $opts);
+        $sub->refreshFrom(['status' => 'active'], $opts, true);
+
+        return $sub;
+    }
+
     public function &__get($k)
     {
         if($k === 'items') {

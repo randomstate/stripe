@@ -5,11 +5,12 @@ namespace RandomState\Stripe\Fake;
 
 
 use RandomState\Stripe\Fake\Traits\Ids;
+use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
 use Stripe\StripeObject;
 
 class SubscriptionItem extends \Stripe\SubscriptionItem
 {
-    use Ids;
+    use Ids, RuntimeExpansions;
 
     public static function constructFrom($values, $opts = null)
     {

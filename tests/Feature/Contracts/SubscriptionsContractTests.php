@@ -40,6 +40,7 @@ trait SubscriptionsContractTests
         $this->assertEquals($quantity, $subscription->items->data[0]->quantity);
         $this->assertEquals($plan->id, $subscription->items->data[0]->plan->id);
         $this->assertNotNull($subscription->items->data[0]->id);
+        $this->assertEquals('active', $subscription->status);
     }
 
     /**

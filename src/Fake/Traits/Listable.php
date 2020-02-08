@@ -10,11 +10,15 @@ use RandomState\Stripe\Stripe\Operations\ListOperator;
 
 trait Listable
 {
-    use ResourceClient, ResourceStorage;
+    use ResourceClient, ResourceStorage, ExpandsResource;
 
     public function all($params = null)
     {
         $operator = new ListOperator();
+
+        foreach($this->resources as $resource) {
+            $this->resolveExpansions($resource, $params['expand'] ?? []);
+        }
 
         return RequestableCollection::constructFrom([
             'data' => $operator->apply($params, array_values($this->resources))

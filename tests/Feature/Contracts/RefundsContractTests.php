@@ -94,7 +94,7 @@ trait RefundsContractTests
         ]);
 
         $this->assertInstanceOf(Refund::class, $updated);
-        $this->assertEquals($metadata, $updated->metadata->__toArray());
+        $this->assertEquals($metadata, $updated->metadata->toArray());
         $this->assertEquals($refund->id, $updated->id);
     }
 

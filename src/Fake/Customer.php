@@ -102,7 +102,7 @@ class Customer extends \Stripe\Customer
     {
     }
 
-    public function deleteDiscount()
+    public function deleteDiscount($params = null, $opts = null)
     {
         $this->coupon = null;
         $this->discount = null;

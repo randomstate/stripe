@@ -17,17 +17,17 @@ class RequestableCollection extends Collection
 
     public function create($params = null, $opts = null)
     {
-        return ($this->onCreate)($params, $opts);
+        return ($this->onCreate ?? $this->dummy())($params, $opts);
     }
 
     public function retrieve($id, $params = null, $opts = null)
     {
-        return ($this->onRetrieve)($id, $params, $opts);
+        return ($this->onRetrieve ?? $this->dummy())($id, $params, $opts);
     }
 
     public function all($params = null, $opts = null)
     {
-        return ($this->onAll)($params, $opts);
+        return ($this->onAll ?? $this->dummy())($params, $opts);
     }
 
 
@@ -70,5 +70,10 @@ class RequestableCollection extends Collection
         }
 
         return parent::__get($k);
+    }
+
+    protected function dummy()
+    {
+        return function($params, $opts){};
     }
 }

@@ -10,6 +10,8 @@ use RandomState\Stripe\Contracts\Charges;
 use RandomState\Stripe\Contracts\Coupons;
 use RandomState\Stripe\Contracts\Customers;
 use RandomState\Stripe\Contracts\Discounts;
+use RandomState\Stripe\Contracts\InvoiceItems;
+use RandomState\Stripe\Contracts\Invoices;
 use RandomState\Stripe\Contracts\PaymentMethods;
 use RandomState\Stripe\Contracts\Plans;
 use RandomState\Stripe\Contracts\Products;
@@ -128,5 +130,21 @@ trait BillingProviderContractTests
     public function has_setup_intents_client()
     {
         $this->assertInstanceOf(SetupIntents::class, $this->getProvider()->setupIntents());
+    }
+
+    /**
+     * @test
+     */
+    public function has_invoices_client()
+    {
+        $this->assertInstanceOf(Invoices::class, $this->getProvider()->invoices());
+    }
+
+    /**
+     * @test
+     */
+    public function has_invoice_items_client()
+    {
+        $this->assertInstanceOf(InvoiceItems::class, $this->getProvider()->invoices()->items());
     }
 }

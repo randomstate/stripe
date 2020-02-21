@@ -8,6 +8,8 @@ trait Creatable
 {
     use ResourceClient, ResourceStorage, Ids, ExpandsResource;
 
+    protected $onCreate = [];
+
     public function create($params = [])
     {
         $id = $params['id'] ?? null;
@@ -29,6 +31,10 @@ trait Creatable
         $this->resources[$id] = $object = ($this->getResourceClass())::constructFrom($params);
 
         $this->resolveExpansions($object, $expands);
+
+        foreach($this->onCreate as $callback) {
+            $callback($object);
+        }
 
         return $object;
     }

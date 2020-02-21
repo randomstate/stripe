@@ -7,6 +7,8 @@ namespace RandomState\Stripe;
 use RandomState\Stripe\Fake\Charges;
 use RandomState\Stripe\Fake\Coupons;
 use RandomState\Stripe\Fake\Customers;
+use RandomState\Stripe\Fake\InvoiceItems;
+use RandomState\Stripe\Fake\Invoices;
 use RandomState\Stripe\Fake\PaymentMethods;
 use RandomState\Stripe\Fake\Plans;
 use RandomState\Stripe\Fake\Products;
@@ -16,6 +18,9 @@ use RandomState\Stripe\Fake\Sources;
 use RandomState\Stripe\Fake\Subscriptions;
 use RandomState\Stripe\Fake\Tokens;
 use RandomState\Stripe\Fake\UsageRecords;
+use Stripe\Stripe;
+use Stripe\Util\DefaultLogger;
+use Stripe\Util\LoggerInterface;
 
 class Fake implements BillingProvider
 {
@@ -31,9 +36,21 @@ class Fake implements BillingProvider
     protected $usageRecords;
     protected $paymentMethods;
     protected $setupIntents;
+    protected $invoices;
 
     public function __construct()
     {
+        Stripe::$logger = (new class implements LoggerInterface {
+            public function error($message, array $context = [])
+            {
+                if(strpos($message, 'Undefined property') > -1 ){
+                    return;
+                }
+
+                (new DefaultLogger)->error($message, $context);
+            }
+        });
+
         $this->charges = new Charges;
         $this->customers = new Customers;
         $this->products = new Products;
@@ -46,6 +63,7 @@ class Fake implements BillingProvider
         $this->usageRecords = new UsageRecords;
         $this->paymentMethods = new PaymentMethods();
         $this->setupIntents = new SetupIntents();
+        $this->invoices = new Invoices(new InvoiceItems());
     }
 
     public function charges()
@@ -106,5 +124,10 @@ class Fake implements BillingProvider
     public function setupIntents()
     {
         return $this->setupIntents;
+    }
+
+    public function invoices()
+    {
+        return $this->invoices;
     }
 }

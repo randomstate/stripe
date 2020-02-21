@@ -48,10 +48,12 @@ class Subscription extends \Stripe\Subscription
     {
     }
 
-    public function deleteDiscount()
+    public function deleteDiscount($params = null, $opts = null)
     {
         $this->coupon = null;
         $this->discount = null;
+
+        return $this;
     }
 
     public function cancel($params = null, $opts = null)

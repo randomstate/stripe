@@ -14,6 +14,6 @@ class ProductsTest extends TestCase
 
     public function createClient()
     {
-        return new Products;
+        return $this->fake->products();
     }
 }

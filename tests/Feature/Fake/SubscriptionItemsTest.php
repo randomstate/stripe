@@ -19,26 +19,26 @@ class SubscriptionItemsTest extends TestCase
 
     public function createClient()
     {
-        return new SubscriptionItems();
+        return $this->fake->subscriptions()->items();
     }
 
     public function customersClient()
     {
-        return new Customers();
+        return $this->fake->customers();
     }
 
     public function plansClient()
     {
-        return new Plans();
+        return $this->fake->plans();
     }
 
     public function productsClient()
     {
-        return new Products();
+        return $this->fake->products();
     }
 
     public function subscriptionsClient()
     {
-        return new Subscriptions();
+        return $this->fake->subscriptions();
     }
 }

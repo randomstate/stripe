@@ -18,27 +18,27 @@ class DiscountsTest extends TestCase
 
     public function customersClient()
     {
-        return new Customers;
+        return $this->fake->customers();
     }
 
     public function couponsClient()
     {
-        return new Coupons;
+        return $this->fake->coupons();
     }
 
     public function subscriptionsClient()
     {
-        return new Subscriptions;
+        return $this->fake->subscriptions();
     }
 
     public function plansClient()
     {
-        return new Plans;
+        return $this->fake->plans();
     }
 
     public function productsClient()
     {
-        return new Products;
+        return $this->fake->products();
     }
 
 

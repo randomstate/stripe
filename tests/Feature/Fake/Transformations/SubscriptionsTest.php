@@ -15,7 +15,7 @@ class SubscriptionsTest extends TestCase
      */
     public function plan_is_populated_for_subscriptions_with_only_one_item()
     {
-       $subscriptions = new Subscriptions;
+       $subscriptions = $this->fake->subscriptions();
        $subscription = $subscriptions->create([
           'items' => [
              [

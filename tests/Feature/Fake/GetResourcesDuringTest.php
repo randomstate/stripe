@@ -13,7 +13,7 @@ class GetResourcesDuringTest extends TestCase
 
     public function createClient()
     {
-        return new Charges;
+        return $this->fake->charges();
     }
 
 

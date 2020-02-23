@@ -11,7 +11,7 @@ use RandomState\Stripe\Fake\Traits\Listable;
 use RandomState\Stripe\Fake\Traits\Retrievable;
 use RandomState\Stripe\Fake\Traits\Updatable;
 
-class SubscriptionItems implements \RandomState\Stripe\Contracts\SubscriptionItems
+class SubscriptionItems extends FakeClient implements \RandomState\Stripe\Contracts\SubscriptionItems
 {
     use CrudMethods;
 

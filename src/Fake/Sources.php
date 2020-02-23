@@ -6,7 +6,7 @@ namespace RandomState\Stripe\Fake;
 
 use RandomState\Stripe\Fake\Traits\CruMethods;
 
-class Sources implements \RandomState\Stripe\Contracts\Sources
+class Sources extends FakeClient implements \RandomState\Stripe\Contracts\Sources
 {
     // Only uses lists in Fake to access elements for customers' nested sources.
     use CruMethods;

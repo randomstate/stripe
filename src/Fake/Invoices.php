@@ -5,11 +5,12 @@ namespace RandomState\Stripe\Fake;
 
 
 use RandomState\Stripe\Contracts\InvoiceItems as InvoiceItems;
+use RandomState\Stripe\Fake;
 use RandomState\Stripe\Fake\Nested\RequestableCollection;
 use RandomState\Stripe\Fake\Traits\CrudMethods;
 use Stripe\InvoiceLineItem;
 
-class Invoices implements \RandomState\Stripe\Contracts\Invoices
+class Invoices extends FakeClient implements \RandomState\Stripe\Contracts\Invoices
 {
     use CrudMethods;
 
@@ -18,8 +19,9 @@ class Invoices implements \RandomState\Stripe\Contracts\Invoices
      */
     protected $items;
 
-    public function __construct(InvoiceItems $items)
+    public function __construct(Fake $stripe, InvoiceItems $items)
     {
+        parent::__construct($stripe);
         $this->items = $items;
 
         $this->onCreate[] = $this->lineItemPopulator();

@@ -15,6 +15,7 @@ use RandomState\Stripe\Fake\Products;
 use RandomState\Stripe\Fake\Refunds;
 use RandomState\Stripe\Fake\SetupIntents;
 use RandomState\Stripe\Fake\Sources;
+use RandomState\Stripe\Fake\SubscriptionItems;
 use RandomState\Stripe\Fake\Subscriptions;
 use RandomState\Stripe\Fake\Tokens;
 use RandomState\Stripe\Fake\UsageRecords;
@@ -40,10 +41,11 @@ class Fake implements BillingProvider
 
     public function __construct()
     {
-        Stripe::$logger = (new class implements LoggerInterface {
+        Stripe::$logger = (new class implements LoggerInterface
+        {
             public function error($message, array $context = [])
             {
-                if(strpos($message, 'Undefined property') > -1 ){
+                if (strpos($message, 'Undefined property') > -1) {
                     return;
                 }
 
@@ -51,19 +53,19 @@ class Fake implements BillingProvider
             }
         });
 
-        $this->charges = new Charges;
-        $this->customers = new Customers;
-        $this->products = new Products;
-        $this->refunds = new Refunds;
-        $this->tokens = new Tokens;
-        $this->sources = new Sources;
-        $this->coupons = new Coupons;
-        $this->plans = new Plans;
-        $this->subscriptions = new Subscriptions;
-        $this->usageRecords = new UsageRecords;
-        $this->paymentMethods = new PaymentMethods();
-        $this->setupIntents = new SetupIntents();
-        $this->invoices = new Invoices(new InvoiceItems());
+        $this->charges = new Charges($this);
+        $this->customers = new Customers($this);
+        $this->products = new Products($this);
+        $this->refunds = new Refunds($this);
+        $this->tokens = new Tokens($this);
+        $this->sources = new Sources($this);
+        $this->coupons = new Coupons($this);
+        $this->plans = new Plans($this);
+        $this->subscriptions = new Subscriptions($this, new SubscriptionItems($this));
+        $this->usageRecords = new UsageRecords($this);
+        $this->paymentMethods = new PaymentMethods($this);
+        $this->setupIntents = new SetupIntents($this);
+        $this->invoices = new Invoices($this, new InvoiceItems($this));
     }
 
     public function charges()

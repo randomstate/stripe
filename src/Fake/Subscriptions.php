@@ -4,17 +4,19 @@
 namespace RandomState\Stripe\Fake;
 
 
+use RandomState\Stripe\Fake;
 use RandomState\Stripe\Fake\Traits\CrudMethods;
 
-class Subscriptions implements \RandomState\Stripe\Contracts\Subscriptions
+class Subscriptions extends FakeClient implements \RandomState\Stripe\Contracts\Subscriptions
 {
     use CrudMethods;
 
     protected $items;
 
-    public function __construct()
+    public function __construct(Fake $stripe, SubscriptionItems $items)
     {
-        $this->items = new SubscriptionItems;
+        parent::__construct($stripe);
+        $this->items = $items;
     }
 
     public static function idPrefix()

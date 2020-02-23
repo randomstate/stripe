@@ -15,12 +15,12 @@ class PlansTest extends TestCase
 
     public function createClient()
     {
-        return new Plans;
+        return $this->fake->plans();
     }
 
     public function createProductsClient()
     {
-        return new Products;
+        return $this->fake->products();
     }
 
 

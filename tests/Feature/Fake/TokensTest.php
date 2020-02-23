@@ -14,7 +14,7 @@ class TokensTest extends TestCase
 
     public function createClient()
     {
-        return new Tokens;
+        return $this->fake->tokens();
     }
 
     /**

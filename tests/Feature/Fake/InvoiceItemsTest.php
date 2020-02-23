@@ -15,16 +15,12 @@ class InvoiceItemsTest extends TestCase
 
     public function createClient()
     {
-        return new InvoiceItems();
+        return $this->fake->invoices()->items();
     }
 
     public function createCustomersClient()
     {
-        if($this->customersClient) {
-            return $this->customersClient;
-        }
-
-        return $this->customersClient = new Customers();
+        return $this->fake->customers();
     }
 
 

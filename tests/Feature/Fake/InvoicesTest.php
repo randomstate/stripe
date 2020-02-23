@@ -32,9 +32,9 @@ class InvoicesTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->invoiceItemsClient = new InvoiceItems();
-        $this->client = new Invoices($this->invoiceItemsClient);
-        $this->customersClient = new Customers();
+        $this->invoiceItemsClient = $this->fake->invoices()->items();
+        $this->client = $this->fake->invoices();
+        $this->customersClient = $this->fake->customers();
     }
 
     protected function getClient()

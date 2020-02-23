@@ -14,6 +14,6 @@ class SetupIntentsTest extends TestCase
 
     public function createClient()
     {
-        return new SetupIntents();
+        return $this->fake->setupIntents();
     }
 }

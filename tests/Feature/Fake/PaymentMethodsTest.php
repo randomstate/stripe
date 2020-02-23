@@ -15,11 +15,11 @@ class PaymentMethodsTest extends TestCase
 
     public function getPaymentMethodsClient()
     {
-        return new PaymentMethods();
+        return $this->fake->paymentMethods();
     }
 
     public function getCustomersClient()
     {
-        return new Customers();
+        return $this->fake->customers();
     }
 }

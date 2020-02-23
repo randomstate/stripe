@@ -6,7 +6,7 @@ namespace RandomState\Stripe\Fake;
 
 use RandomState\Stripe\Fake\Traits\CrudMethods;
 
-class InvoiceItems implements \RandomState\Stripe\Contracts\InvoiceItems
+class InvoiceItems extends FakeClient implements \RandomState\Stripe\Contracts\InvoiceItems
 {
     use CrudMethods;
 

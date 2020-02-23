@@ -17,22 +17,22 @@ class SubscriptionsTest extends TestCase
 
     public function createClient()
     {
-        return new Subscriptions;
+        return $this->fake->subscriptions();
     }
 
     public function customersClient()
     {
-        return new Customers;
+        return $this->fake->customers();
     }
 
     public function plansClient()
     {
-        return new Plans;
+        return $this->fake->plans();
     }
 
     public function productsClient()
     {
-        return new Products;
+        return $this->fake->products();
     }
 
 

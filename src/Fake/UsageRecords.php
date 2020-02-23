@@ -7,7 +7,7 @@ namespace RandomState\Stripe\Fake;
 use RandomState\Stripe\Fake\Traits\Creatable;
 use RandomState\Stripe\Fake\Traits\Listable;
 
-class UsageRecords implements \RandomState\Stripe\Contracts\UsageRecords
+class UsageRecords extends FakeClient implements \RandomState\Stripe\Contracts\UsageRecords
 {
     use Creatable;
 

@@ -15,12 +15,12 @@ class SourcesTest extends TestCase
 
     public function createClient()
     {
-        return new Sources;
+        return $this->fake->sources();
     }
 
     public function createCustomersClient()
     {
-        return new Customers;
+        return $this->fake->customers();
     }
 
 

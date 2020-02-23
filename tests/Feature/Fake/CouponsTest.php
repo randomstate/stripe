@@ -14,6 +14,6 @@ class CouponsTest extends TestCase
 
     public function createClient()
     {
-        return new Coupons;
+        return $this->fake->coupons();
     }
 }

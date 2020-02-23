@@ -14,7 +14,7 @@ class CreatablesTest extends TestCase
      */
     public function created_at_timestamp_is_added_to_mocks()
     {
-        $customer = (new Customers)->create();
+        $customer = $this->fake->customers()->create();
         $this->assertEquals(time(), $customer->created);
     }
     
@@ -23,7 +23,7 @@ class CreatablesTest extends TestCase
      */
     public function livemode_set_to_true() 
     {
-        $customer = (new Customers)->create();
+        $customer = $this->fake->customers()->create();
         $this->assertFalse($customer->livemode);
     }
 }

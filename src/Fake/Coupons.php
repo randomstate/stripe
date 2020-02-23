@@ -6,7 +6,7 @@ namespace RandomState\Stripe\Fake;
 
 use RandomState\Stripe\Fake\Traits\CrudMethods;
 
-class Coupons implements \RandomState\Stripe\Contracts\Coupons
+class Coupons extends FakeClient implements \RandomState\Stripe\Contracts\Coupons
 {
     use CrudMethods;
 

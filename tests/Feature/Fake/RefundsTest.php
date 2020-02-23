@@ -15,12 +15,12 @@ class RefundsTest extends TestCase
 
     public function createClient()
     {
-        return new Refunds;
+        return $this->fake->refunds();
     }
 
     public function createChargesClient()
     {
-        return new Charges;
+        return $this->fake->charges();
     }
 
 

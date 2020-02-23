@@ -58,7 +58,13 @@ class Customer extends \Stripe\Customer
     public function __construct($id = null, $opts = null)
     {
         parent::__construct($id, $opts);
-        $this->sourcesClient = new Sources;
+    }
+
+    public function setSourcesClient(\RandomState\Stripe\Contracts\Sources $sources)
+    {
+        $this->sourcesClient = $sources;
+
+        return $this;
     }
 
     public function &__get($k)

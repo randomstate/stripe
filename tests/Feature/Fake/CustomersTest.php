@@ -14,6 +14,6 @@ class CustomersTest extends TestCase
 
     public function createClient()
     {
-        return new Customers;
+        return $this->fake->customers();
     }
 }

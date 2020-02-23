@@ -6,7 +6,7 @@ namespace RandomState\Stripe\Fake;
 
 use RandomState\Stripe\Fake\Traits\CruMethods;
 
-class PaymentMethods implements \RandomState\Stripe\Contracts\PaymentMethods
+class PaymentMethods extends FakeClient implements \RandomState\Stripe\Contracts\PaymentMethods
 {
     use CruMethods;
 

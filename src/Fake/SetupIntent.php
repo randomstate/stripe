@@ -4,11 +4,12 @@
 namespace RandomState\Stripe\Fake;
 
 
+use RandomState\Stripe\Fake\Traits\Fake;
 use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
 
 class SetupIntent extends \Stripe\SetupIntent
 {
-    use RuntimeExpansions;
+    use RuntimeExpansions, Fake;
 
     public function confirm($params = null, $options = null)
     {

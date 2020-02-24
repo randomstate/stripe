@@ -16,10 +16,12 @@ class SubscriptionsTest extends TestCase
     public function plan_is_populated_for_subscriptions_with_only_one_item()
     {
        $subscriptions = $this->fake->subscriptions();
+       $plan = $this->fake->plans()->create(['id' => '1234']);
+
        $subscription = $subscriptions->create([
           'items' => [
              [
-                 'plan' => '1234',
+                 'plan' => $plan->id,
              ]
           ]
        ]);

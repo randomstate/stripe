@@ -4,40 +4,43 @@
 namespace RandomState\Stripe\Fake;
 
 
+use RandomState\Stripe\Contracts\SubscriptionItems as SubscriptionItems;
 use RandomState\Stripe\Fake\Nested\RequestableCollection;
+use RandomState\Stripe\Fake\Traits\Fake;
 use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
 
 class Subscription extends \Stripe\Subscription
 {
-    use RuntimeExpansions;
+    use RuntimeExpansions, Fake;
 
-    public static function constructFrom($values, $opts = null)
+    /**
+     * @var SubscriptionItems
+     */
+    protected $subscriptionItems;
+
+    public function setSubscriptionItems(SubscriptionItems $items)
     {
-        $sub = parent::constructFrom($values, $opts);
-        $sub->refreshFrom(['status' => 'active'], $opts, true);
+        $this->subscriptionItems = $items;
 
-        return $sub;
+        return $this;
+    }
+
+    public function subscriptionItems()
+    {
+        return $this->subscriptionItems;
     }
 
     public function &__get($k)
     {
         if($k === 'items') {
-            $items = parent::__get($k);
-            $processed = [];
-
-            foreach($items as $item) {
-                $processed[] = SubscriptionItem::constructFrom($item);
-            }
-
             $items = RequestableCollection::constructFrom([
-                'data' => $processed
+                'data' => parent::__get($k)
             ]);
 
             return $items;
         }
 
-
-        if($k === 'plan' && count($this->items) == 1) {
+        if($k === 'plan' && count($this->items->data) == 1) {
             return $this->items->data[0]->plan;
         }
 

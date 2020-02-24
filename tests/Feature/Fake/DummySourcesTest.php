@@ -19,7 +19,7 @@ class DummySourcesTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->factory = new DummySourceFactory();
+        $this->factory = new DummySourceFactory($this->fake);
     }
 
     /**

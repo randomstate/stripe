@@ -4,11 +4,12 @@
 namespace RandomState\Stripe\Fake;
 
 
+use RandomState\Stripe\Fake\Traits\Fake;
 use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
 
 class Source extends \Stripe\Source
 {
-    use RuntimeExpansions;
+    use RuntimeExpansions, Fake;
 
     public function save($opts = null)
     {

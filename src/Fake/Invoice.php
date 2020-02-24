@@ -4,8 +4,13 @@
 namespace RandomState\Stripe\Fake;
 
 
+use RandomState\Stripe\Fake\Traits\Fake;
+use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
+
 class Invoice extends \Stripe\Invoice
 {
+    use Fake, RuntimeExpansions;
+
     public function &__get($k)
     {
         if($k === 'total') {

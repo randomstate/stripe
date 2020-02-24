@@ -33,7 +33,7 @@ trait RuntimeExpansions
             $expander = $uncamelize($expansion);
 
             if ($expander = static::$expanders[$expander] ?? null) {
-                return $expander();
+                return $expander($this);
             }
         }
 

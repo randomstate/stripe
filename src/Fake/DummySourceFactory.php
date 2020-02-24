@@ -4,14 +4,27 @@
 namespace RandomState\Stripe\Fake;
 
 
+use RandomState\Stripe\Fake;
+
 class DummySourceFactory
 {
+    /**
+     * @var Fake
+     */
+    protected $stripe;
+
+    public function __construct(Fake $stripe)
+    {
+        $this->stripe = $stripe;
+    }
 
     public function build($params)
     {
         $id = uniqid('card_');
 
-        if ($this->isCardTokenCard($params)) {
+        if($pm = $this->isPaymentMethod($params)) {
+            return $this->stripe->paymentMethods()->create($pm);
+        } elseif ($this->isCardTokenCard($params)) {
             return Card::constructFrom(array_merge($params, [
                 'id' => $id,
                 'last4' => substr(array_search($params['source'], static::$cardNumbers), -4, 4),
@@ -81,6 +94,23 @@ class DummySourceFactory
         '4000007020000003' => 'tok_sg',
     ];
 
+    public static $paymentMethods = [
+        'pm_card_visa' => [
+            'type' => 'card',
+            'card' => [
+                'brand' => 'visa',
+                'last4' => '4242',
+            ]
+        ],
+        'pm_card_mastercard' => [
+            'type' => 'card',
+            'card' => [
+                'brand' => 'mastercard',
+                'last4' => '4242',
+            ]
+        ],
+    ];
+
     private function isCardNumberedCard($params)
     {
         if (!($params['source'] ?? false)) {
@@ -110,5 +140,16 @@ class DummySourceFactory
         return $params['source'] ?? false;
     }
 
+    private function isPaymentMethod($params)
+    {
+        if(!is_string($params)) {
+            return false;
+        };
 
+        if(!strpos($params, 'pm')) {
+            return static::$paymentMethods['pm_card_visa'];
+        }
+
+        return static::$paymentMethods[$params] ?? false;
+    }
 }

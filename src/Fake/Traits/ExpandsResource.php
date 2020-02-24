@@ -20,7 +20,7 @@ trait ExpandsResource
                 $words = str_replace('_', ' ', $part);
                 $methodName = 'expand' . str_replace(' ', '', ucwords($words));
 
-                $current->refreshFrom([$part => $current->{$methodName}()], [], true);
+                $current->{$part} = $current->{$methodName}();
                 $current = $current->{$part};
             }
         }

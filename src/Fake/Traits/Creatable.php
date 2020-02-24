@@ -12,29 +12,18 @@ trait Creatable
 
     public function create($params = [])
     {
-        $id = $params['id'] ?? null;
-
-        if(!$id) {
-            $id = $this->generateId();
-            $params['id'] = $id;
+        $creater = new \RandomState\Stripe\Fake\Crud\Creater(function() {
+            return $this->generateId();
+        }, $this->getResourceClass());
+        
+        foreach($this->onCreate as $onCreate) {
+            $creater->onCreate($onCreate);
         }
+        
+        $object = $creater
+            ->create($params);
 
-        $params = array_merge([
-            'created' => time(),
-            'metadata' => [],
-            'livemode' => false,
-        ], $params);
-
-        $expands = $params['expand'] ?? [];
-        unset($params['expand']);
-
-        $this->resources[$id] = $object = ($this->getResourceClass())::constructFrom($params);
-
-        $this->resolveExpansions($object, $expands);
-
-        foreach($this->onCreate as $callback) {
-            $callback($object);
-        }
+        $this->resources[$object->id] = $object;
 
         return $object;
     }

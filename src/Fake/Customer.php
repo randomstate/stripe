@@ -5,12 +5,13 @@ namespace RandomState\Stripe\Fake;
 
 
 use RandomState\Stripe\Fake\Nested\RequestableCollection;
+use RandomState\Stripe\Fake\Traits\Fake;
 use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
 use Stripe\Collection;
 
 class Customer extends \Stripe\Customer
 {
-    use RuntimeExpansions;
+    use RuntimeExpansions, Fake;
 
     protected $_sources = [];
 

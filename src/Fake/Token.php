@@ -4,11 +4,12 @@
 namespace RandomState\Stripe\Fake;
 
 
+use RandomState\Stripe\Fake\Traits\Fake;
 use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
 
 class Token extends \Stripe\Token
 {
-    use RuntimeExpansions;
+    use RuntimeExpansions, Fake;
 
     public static function constructFrom($values, $opts = null)
     {

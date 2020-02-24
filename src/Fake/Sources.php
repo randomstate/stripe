@@ -44,6 +44,6 @@ class Sources extends FakeClient implements \RandomState\Stripe\Contracts\Source
     {
         // if dummy card given, return a card object that matches it
         // if direct source id given and is a card, return a card object that matches it to the best possible
-        return (new DummySourceFactory)->build($params);
+        return (new DummySourceFactory($this->stripe))->build($params);
     }
 }

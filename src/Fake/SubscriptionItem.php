@@ -4,13 +4,14 @@
 namespace RandomState\Stripe\Fake;
 
 
+use RandomState\Stripe\Fake\Traits\Fake;
 use RandomState\Stripe\Fake\Traits\Ids;
 use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
 use Stripe\StripeObject;
 
 class SubscriptionItem extends \Stripe\SubscriptionItem
 {
-    use Ids, RuntimeExpansions;
+    use Ids, RuntimeExpansions, Fake;
 
     public static function constructFrom($values, $opts = null)
     {
@@ -23,18 +24,19 @@ class SubscriptionItem extends \Stripe\SubscriptionItem
             $values['id'] = $temp->generateId();
         }
 
-        $item = parent::constructFrom($values, $opts);
-
-        if (is_string($values['plan'])) {
-            $item->plan = Plan::constructFrom(['id' => $values['plan']]);
-        }
-
-        return $item;
+        return parent::constructFrom($values, $opts);
     }
 
     public function delete($params = null, $opts = null)
     {
 
+    }
+
+    public function save($opts = null)
+    {
+        $this->fake->subscriptions()->items()->update($this->id, $this->toArray());
+
+        return true;
     }
 
     public static function idPrefix()

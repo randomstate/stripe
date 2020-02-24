@@ -18,6 +18,7 @@ class Customers extends FakeClient implements \RandomState\Stripe\Contracts\Cust
     public function __construct(Fake $stripe)
     {
         parent::__construct($stripe);
+
         $this->onCreate[] = function(Customer $customer) {
             $customer->setSourcesClient($this->stripe->sources());
         };

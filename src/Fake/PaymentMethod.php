@@ -4,11 +4,12 @@
 namespace RandomState\Stripe\Fake;
 
 
+use RandomState\Stripe\Fake\Traits\Fake;
 use RandomState\Stripe\Fake\Traits\RuntimeExpansions;
 
 class PaymentMethod extends \Stripe\PaymentMethod
 {
-    use RuntimeExpansions;
+    use RuntimeExpansions, Fake;
 
     public function attach($params = null, $opts = null)
     {

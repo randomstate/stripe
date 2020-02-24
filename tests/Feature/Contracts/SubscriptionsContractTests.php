@@ -137,7 +137,7 @@ trait SubscriptionsContractTests
         $this->assertEquals($subscription->id, $subscriptions->data[0]->id);
     }
 
-    protected function createTestPlan()
+    protected function createTestPlan($trialDays = null)
     {
         $product = $this->productsClient()->create([
             'name' => 'test product',
@@ -149,7 +149,7 @@ trait SubscriptionsContractTests
             'currency' => 'gbp',
             'interval' => 'month',
             'amount' => 10000,
-            'trial_period_days' => 60,
+            'trial_period_days' => $trialDays,
         ]);
 
         return $plan;

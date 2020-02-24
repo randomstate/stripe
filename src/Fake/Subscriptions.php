@@ -59,15 +59,17 @@ class Subscriptions extends FakeClient implements \RandomState\Stripe\Contracts\
 
         if($params['trial_from_plan'] ?? false) {
             $plan = $this->stripe->plans()->retrieve($params['items'][0]->plan->id);
-            $params['status'] = 'trialing';
             if($plan->trial_period_days) {
                 $params['trial_end'] = (new \DateTime('+'.$plan->trial_period_days.' days'))->getTimestamp();
+                $params['status'] = 'trialing';
             }
         } elseif ($params['trial_end'] ?? false) {
             if($params['trial_end'] > (new \DateTime)->getTimestamp()) {
                 $params['status'] = 'trialing';
             }
-        } else {
+        }
+
+        if(!($params['status'] ?? false)) {
             $params['status'] = 'active';
         }
 
